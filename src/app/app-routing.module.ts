@@ -1,7 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DefaultComponent } from './layouts/default/default.component';
+import { FullwidthComponent } from './layout/fullwidth/fullwidth.component';
+import { HomeComponent } from './modules/home/home.component';
+import { LoginComponent } from './modules/login/login.component';
+import { ContactComponent } from './modules/contact/contact.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: 'full/login', pathMatch: 'full' },
+  {
+    path: 'default', component: DefaultComponent,
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
+      }
+    ]
+  },
+  {
+    path: 'full', component: FullwidthComponent,
+    children: [{
+      path: 'login',
+      component: LoginComponent
+    }]
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
